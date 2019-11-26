@@ -1,5 +1,6 @@
 package com.gotk
 
+import GoTkCharacter
 import com.gotk.api.GoTk
 import org.junit.Assert
 import org.junit.Before
@@ -38,6 +39,14 @@ class GoTkTest {
 
             returnedCharacter = testedObject.api.getCharacterByName("Arya Stark")
             Assert.assertEquals("Arya Stark", returnedCharacter[0].name)
+        }
+    }
+
+    @Test
+    fun getCharactersByPage() {
+        runBlocking {
+            var returnedCharacters : List<GoTkCharacter> = testedObject.api.getCharactersByPage(1)
+            Assert.assertEquals(10, returnedCharacters.size)
         }
     }
 

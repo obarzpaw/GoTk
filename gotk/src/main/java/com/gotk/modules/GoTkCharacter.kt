@@ -1,4 +1,4 @@
-data class Character(
+data class GoTkCharacter(
     val aliases: List<String>,
     val allegiances: List<String>,
     val books: List<String>,
