@@ -9,6 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.Url
 
 interface GoTkAPIService {
     @GET("characters/{character_id}")
@@ -23,11 +24,21 @@ interface GoTkAPIService {
     @GET("characters")
     suspend fun getCharactersByPage(@Query("page") num: Int) : List<GoTkCharacter>
 
+    @GET
+    suspend fun getCharacterByUrl(@Url url : String) : GoTkCharacter
+
     @GET("books/{book_id}")
     suspend fun getBookById(@Path("book_id") id: Int) : Book
 
+    @GET
+    suspend fun getBookByUrl(@Url url : String) : Book
+
     @GET("houses/{house_id}")
     suspend fun getHouseById(@Path("house_id") id: Int) : House
+
+    @GET
+    suspend fun getHouseByUrl(@Url url : String) : House
+
 
     companion object Factory {
         fun create(): GoTkAPIService {

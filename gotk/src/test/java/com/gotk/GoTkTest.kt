@@ -51,9 +51,27 @@ class GoTkTest {
     }
 
     @Test
+    fun getCharacterByUrl() {
+        runBlocking {
+            val url = "https://anapioficeandfire.com/api/characters/36"
+            val returnedCharacter = testedObject.api.getCharacterByUrl(url)
+            Assert.assertEquals("Aegon Frey", returnedCharacter?.name)
+        }
+    }
+
+    @Test
     fun getBookById() {
         runBlocking {
             val returnedBook = testedObject.api.getBookById(2)
+            Assert.assertEquals("A Clash of Kings", returnedBook?.name)
+        }
+    }
+
+    @Test
+    fun getBookByUrl() {
+        runBlocking {
+            val url = "https://www.anapioficeandfire.com/api/books/2"
+            val returnedBook = testedObject.api.getBookByUrl(url)
             Assert.assertEquals("A Clash of Kings", returnedBook?.name)
         }
     }
@@ -63,6 +81,15 @@ class GoTkTest {
         runBlocking {
             val returnedHouse = testedObject.api.getHouseById(378)
             Assert.assertEquals("House Targaryen of King's Landing", returnedHouse?.name)
+        }
+    }
+
+    @Test
+    fun getHouseByUrl() {
+        runBlocking {
+            val url = "https://anapioficeandfire.com/api/houses/229"
+            val returnedHouse = testedObject.api.getHouseByUrl(url)
+            Assert.assertEquals("House Lannister of Casterly Rock", returnedHouse?.name)
         }
     }
 }
