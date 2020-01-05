@@ -42,8 +42,20 @@ interface GoTkAPIService {
 
     companion object Factory {
         fun create(): GoTkAPIService {
+            val httpClient = OkHttpClient.Builder()
+            httpClient.addInterceptor{chain ->
+                val original = chain.request()
+                val requestBuilder = original.newBuilder()
+                    .header("User-Agent", "GoTk")
+                    .header("Accept", "application/vnd.anapioficeandfire+json; version=1")
+
+                val request = requestBuilder.build()
+                chain.proceed(request)
+            }
+            val okHttpClient = httpClient.build()
+
             val retrofit = Retrofit.Builder()
-                .client(OkHttpClient())
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("https://anapioficeandfire.com/api/")
                 .build()
